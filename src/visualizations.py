@@ -1,4 +1,4 @@
-## scatterplot: price vs. review ratings
+## scatter plot to show the price correlation with the guest satisfaction (e.g., price vs. ratings)
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 import altair as alt
@@ -10,7 +10,7 @@ scatterplot = alt.Chart(listing_data).mark_circle().encode(
     y=alt.Y('price:Q', title='Listing Prices')).properties(title='Price vs. Ratings', width=500, height=400)
 # scatterplot
 
-## geospatial heatmap - 
+## geospatial heatmap to visualize high-and-low priced locations
 import pandas as pd
 import folium
 from folium.plugins import HeatMap
