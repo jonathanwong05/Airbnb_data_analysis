@@ -6,13 +6,10 @@ def scatter(df, x_key, y_key):
     ).properties(title=f'{x_key} vs. {y_key}', width=500, height=400)
     
 ## geospatial heatmap to visualize high-and-low priced locations
-import pandas as pd
-import folium
-from folium.plugins import HeatMap
-geospatial = listing_data[['latitude', 'longitude', 'price']].dropna()
-# base map centered around the mean latitude and longitude
-hm = folium.Map(location=[geospatial['latitude'].mean(), geospatial['longitude'].mean()], zoom_start=12)
-# map layer
-heat_data = list(zip(geospatial['latitude'], geospatial['longitude'], geospatial['price']))
-HeatMap(heat_data, radius=10, blur=15, max_zoom=1).add_to(hm)
-# hm
+def geospatial_hm(data,lat,long,x):
+    # base map centered around the mean latitude and longitude
+    hm = folium.Map(location=[data[lat].mean(), data[long].mean()], zoom_start=12)
+    # map layer
+    heat_data = list(zip(data[lat], data[long], data[x]))
+    HeatMap(heat_data, radius=10, blur=15, max_zoom=1).add_to(hm)
+    return hm
