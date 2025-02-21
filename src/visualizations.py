@@ -1,15 +1,10 @@
 ## scatter plot to show the price correlation with the guest satisfaction (e.g., price vs. ratings)
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
-import altair as alt
-load_listing = load_data('Listings.csv')
-listing_data = clean_listing_data(load_listing)
-alt.data_transformers.disable_max_rows()
-scatterplot = alt.Chart(listing_data).mark_circle().encode(
-    x=alt.X('review_scores_rating:Q', title='Review Ratings'),
-    y=alt.Y('price:Q', title='Listing Prices')).properties(title='Price vs. Ratings', width=500, height=400)
-# scatterplot
-
+def scatter(df, x_key, y_key):
+    return alt.Chart(df).mark_circle().encode(
+        x=alt.X(x_key, title=x_key),
+        y=alt.Y(y_key, title=y_key)
+    ).properties(title=f'{x_key} vs. {y_key}', width=500, height=400)
+    
 ## geospatial heatmap to visualize high-and-low priced locations
 import pandas as pd
 import folium
